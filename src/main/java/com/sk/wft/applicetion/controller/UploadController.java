@@ -18,7 +18,7 @@ public class UploadController {
     }
 
     @RequestMapping(value = "/files", method = RequestMethod.POST)
-    public Mono<ResponseDto<?>> files(@RequestPart(value = "dir", required = false) String dir, @RequestPart("file") Flux<FilePart> uploadsFlux) {
-        return uploadService.save(dir, uploadsFlux);
+    public Mono<ResponseDto<?>> files(@RequestPart(value = "dir", required = false) Mono<String> dirMono, @RequestPart("file") Flux<FilePart> uploadsFlux) {
+        return uploadService.save(dirMono, uploadsFlux);
     }
 }
